@@ -2,6 +2,10 @@ GROUP BYAdd commentMore actions
 
 1. Contare quanti iscritti ci sono stati ogni anno
 
+SELECT COUNT(*) AS `numero_iscritti`, YEAR(`students`.`enrolment_date`) AS `anno_iscrizione`Add commentMore actions
+FROM `students`
+GROUP BY `anno_iscrizione`
+
 2. Contare gli insegnanti che hanno l'ufficio nello stesso edificio
 
 3. Calcolare la media dei voti di ogni appello d'esame
