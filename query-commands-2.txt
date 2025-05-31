@@ -1,41 +1,41 @@
-GROUP BYAdd comment
+GROUP BY
 
 1. Contare quanti iscritti ci sono stati ogni anno
 
-SELECT COUNT(*) AS `numero_iscritti`, YEAR(`students`.`enrolment_date`) AS `anno_iscrizione`Add comment
+SELECT COUNT(*) AS `numero_iscritti`, YEAR(`students`.`enrolment_date`) AS `anno_iscrizione`
 FROM `students`
 GROUP BY `anno_iscrizione`
 
 2. Contare gli insegnanti che hanno l'ufficio nello stesso edificio
 
-SELECT COUNT(*) AS `numero_insegnanti`, `teachers`.`office_address` AS `indirizzo_ufficio`Add comment
+SELECT COUNT(*) AS `numero_insegnanti`, `teachers`.`office_address` AS `indirizzo_ufficio`
 FROM `teachers`
 GROUP BY `indirizzo_ufficio`
 
 3. Calcolare la media dei voti di ogni appello d'esame
 
-SELECT AVG(`exam_student`.`vote`) AS `media`, `exam_student`.`exam_id`Add comment
+SELECT AVG(`exam_student`.`vote`) AS `media`, `exam_student`.`exam_id`
 FROM `exam_student`
 GROUP BY `exam_student`.`exam_id`
 
 4. Contare quanti corsi di laurea ci sono per ogni dipartimento
 
 SELECT COUNT(*) AS `numero_corsi`, `degrees`.`department_id`
-FROM `degrees`Add comment
+FROM `degrees`
 GROUP BY `degrees`.`department_id`
 
 JOIN
 
 1. Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
 
-SELECT `students`.`name`, `students`.`surname`, `students`.`registration_number`Add comment
+SELECT `students`.`name`, `students`.`surname`, `students`.`registration_number`
 FROM `students`
 JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`
 WHERE `degrees`.`name` = 'Corso di Laurea in Economia'
 
 2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
 
-SELECT `degrees`.`name`Add comment
+SELECT `degrees`.`name`
 FROM `degrees`
 JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
 WHERE `degrees`.`level` = 'magistrale'
@@ -55,10 +55,16 @@ SELECT `courses`.`name`
 FROM `courses`
 JOIN `course_teacher` ON `course_teacher`.`course_id` = `courses`.`id`
 JOIN `teachers` ON `teachers`.`id` = `course_teacher`.`teacher_id`
-WHERE `teachers`.`name` = 'Fulvio'Add comment
+WHERE `teachers`.`name` = 'Fulvio'
 AND `teachers`.`surname` = 'Amato'
 
 4. Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
+
+SELECT  `students`.`surname`,`students`.`name`, `degrees`.`name`, `departments`.`name`
+FROM `students`
+JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`
+JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
+ORDER BY `students`.`surname` ASC
 
 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
 
